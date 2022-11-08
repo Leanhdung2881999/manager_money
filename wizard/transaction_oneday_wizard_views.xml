@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="transaction_oneday_wizard_view" model="ir.ui.view">
+		<field name="name">transaction.oneday.wizard.view</field>
+		<field name="model">transaction.oneday.wizard</field>
+		<field name="arch" type="xml">
+			<form string="Duplicate Transaction One Day">
+				<group>
+					<field name="date_new_transaction" />
+				</group>
+				<footer>
+					<button string="Confirm" name="duplicate_transaction_oneday" type="object" default_focus="1" class="btn-primary" />
+					<button string="Cancel" class="btn-default" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<!-- <record id="action_duplicate_transaction_oneday"
+		model="ir.actions.act_window">
+		<field name="name">Duplicate Transaction One Day</field>
+		<field name="res_model">transaction.oneday.wizard</field>
+		<field name="binding_model_id" ref="model_transaction_oneday" />
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+		<field name="view_id" ref="transaction_oneday_wizard_view" />
+	</record> -->
+</odoo>

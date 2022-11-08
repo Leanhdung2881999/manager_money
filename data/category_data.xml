@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+	<record id="category_1" model="category">
+		<field name="name">Food and Drinks</field>
+		<field name="icon">https://user-images.githubusercontent.com/79369571/181202263-023d8a63-6dae-4765-a349-8d081ccdc38c.png
+		</field>
+	</record>
+
+	<record id="category_2" model="category">
+		<field name="name">Shopping</field>
+		<field name="icon">https://user-images.githubusercontent.com/79369571/181202271-f3de2391-b0d1-46a2-b02a-1c44ce04d067.png
+		</field>
+	
+	</record>
+
+	<record id="category_3" model="category">
+		<field name="name">Housing</field>
+		<field name="icon">https://user-images.githubusercontent.com/79369571/181202273-f3b108e9-eeab-411d-b53d-52d8db098d88.png
+		</field>
+
+	</record>
+
+	<record id="category_4" model="category">
+		<field name="name">Transportation</field>
+		<field name="icon">https://user-images.githubusercontent.com/79369571/181202275-d4c08613-edac-4b2d-98f8-0a0620949f0a.png
+		</field>
+	</record>
+
+	<record id="category_5" model="category">
+		<field name="name">Life and Entertainment</field>
+		<field name="icon">https://user-images.githubusercontent.com/79369571/181202277-8d57b6c1-aa8b-4ead-817c-ecbba4e508c3.png
+		</field>
+	</record>
+
+	<record id="category_6" model="category">
+		<field name="name">Financial Expenses</field>
+		<field name="icon">https://user-images.githubusercontent.com/79369571/181202282-5e19fc62-351a-4362-b79a-90266b927679.png
+		</field>
+	</record>
+
+</odoo>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<odoo>
+	<record id="wallet_view_tree" model="ir.ui.view">
+		<field name="name">wallet.tree</field>
+		<field name="model">wallet</field>
+		<field name="arch" type="xml">
+			<tree string="Wallet Tree">
+				<field name="name" />
+				<field name="profited" />
+				<!-- <field name="active" /> -->
+				<field name="start_balance" decoration-info="True" />
+				<field name="total_income" decoration-info="True" />
+				<field name="total_expense" decoration-danger="True" />
+				<field name="write_date" />
+				<field name="total" decoration-danger="profited == False"
+					decoration-info="profited == True" />
+				<field name="currency_id" />
+
+			</tree>
+		</field>
+	</record>
+
+	<record id="wallet_view_pivot" model="ir.ui.view">
+		<field name="name">wallet.pivot</field>
+		<field name="model">wallet</field>
+		<field name="arch" type="xml">
+			<pivot string="Wallet Pivot">
+				<field name="name" type="row" />
+				<field name="start_balance" type="measure" />
+				<field name="total_income" type="measure" />
+				<field name="total_expense" type="measure" />
+			</pivot>
+		</field>
+	</record>
+
+	<!-- <record id="wallet_view_graph" model="ir.ui.view"> <field name="name">wallet.graph</field> 
+		<field name="model">wallet</field> <field name="arch" type="xml"> <graph 
+		string="Wallet Graph" type="bar"> <field name="write_date"/> <field name="total_income" 
+		type="measure" operator="+" /> <field name="total_expense" type="measure" 
+		operator="+" /> </graph> </field> </record> -->
+
+	<record id="wallet_view_form" model="ir.ui.view">
+		<field name="name">wallet.form</field>
+		<field name="model">wallet</field>
+		<field name="arch" type="xml">
+			<form string="Wallet Form">
+				<header>
+					<!-- <button name='button_confirm' type='object' class="oe_highlight" 
+						attrs="{'invisible': [('state','=','confirmed')]}" string='Confirm' /> -->
+					<button name='method_default_get' type='object'
+						class="oe_highlight" string='Default Get' />
+
+					<!-- <button name='method_name_create' type='object' class="oe_highlight" 
+						string='Name Create' /> -->
+
+					<!-- <button name='method_write' type='object' class="oe_highlight" 
+						string='Write' /> -->
+
+					<button name='method_search' type='object'
+						class="oe_highlight" string='Search' />
+
+					<button name='method_search_count' type='object'
+						class="oe_highlight" string='Search Count' />
+
+					<!-- <button name='method_name_search' type='object' class="oe_highlight" 
+						string='Name Search' /> -->
+					<button name='method_read' type='object'
+						class="oe_highlight" string='Read' />
+
+					<button name='method_read_group' type='object'
+						class="oe_highlight" string='Read Group' />
+
+					<button name='method_fields_get' type='object'
+						class="oe_highlight" string='Fields Get' />
+
+					<button name='method_fields_view_get' type='object'
+						class="oe_highlight" string='Fields View Get' />
+
+					<!-- <button name='method_unlink' type='object' class="oe_highlight" 
+						string='UnLink' /> -->
+
+					<button name='method_filtered' type='object'
+						class="oe_highlight" string='Filtered' />
+
+					<button name='method_filtered_domain' type='object'
+						class="oe_highlight" string='Filtered Domain' />
+
+					<button name='method_mapped' type='object'
+						class="oe_highlight" string='Mapped' />
+
+					<button name='method_sorted' type='object'
+						class="oe_highlight" string='Sorted' />
+
+					<button name='write_zero' type='object' class="oe_highlight"
+						string='Write zero' />
+
+					<button name='write_one' type='object' class="oe_highlight"
+						string='Write one' />
+
+					<button name='write_two' type='object' class="oe_highlight"
+						string='Write two' />
+					<button name='write_three' type='object'
+						class="oe_highlight" string='Write three' />
+					<button name='write_four' type='object' class="oe_highlight"
+						string='Write four' />
+					<button name='write_five' type='object' class="oe_highlight"
+						string='Write five' />
+					<button name='write_six' type='object' class="oe_highlight"
+						string='Write six' />
+					<button name='check_date' type='object' class="oe_highlight"
+						string='Check Date' />
+
+					<button name='action_read_wallet' type='object'
+						class="oe_highlight" string='Read Wallet' />
+
+					<button name='check_query' type='object'
+						class="oe_highlight" string='Get Transaction of Wallet' />
+
+					<field name="state" widget="statusbar" />
+				</header>
+				<sheet>
+					<div name="button_box" class="oe_button_box">
+						<button name="action_open_transaction_view"
+							class="oe_stat_button" icon="fa-pencil-square-o" type="object">
+							<field name="transaction_count" widget="statinfo" />
+						</button>
+					</div>
+					<group>
+						<group>
+							<field name="name" />
+							<field name="start_balance"
+								attrs="{'readonly': [('state','=','confirmed')]}" />
+							<field name="total_income"
+								attrs="{'invisible': [('state','=','draft')]}" />
+							<field name="total_expense"
+								attrs="{'invisible': [('state','=','draft')]}" />
+							<!-- <field name="test" /> -->
+						</group>
+						<group>
+							<!-- <field name="active" /> -->
+							<field name="currency_id" />
+							<field name="create_uid" />
+							<field name="create_date" />
+							<field name="write_date" />
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="wallet_view_search" model="ir.ui.view">
+		<field name="name">wallet.search</field>
+		<field name="model">wallet</field>
+		<field name="arch" type="xml">
+			<search string="Wallet Search">
+				<!-- <field name="name"
+					filter_domain="['|', ('name', 'ilike', self), ('name', '=', self)]" /> -->
+			</search>
+		</field>
+	</record>
+
+	<record id="wallet_view_search" model="ir.ui.view">
+		<field name="name">wallet.search</field>
+		<field name="model">wallet</field>
+		<field name="arch" type="xml">
+			<search string="Wallet Search">
+				<field name="name" />
+			</search>
+		</field>
+	</record>
+
+	<record id="wallet_view_form_inherit" model="ir.ui.view">
+		<field name="model">wallet</field>
+		<field name="inherit_id" ref="manager_money.wallet_view_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//group" position="after">
+				<notebook>
+					<page name="list_transactions" string="List Transaction">
+						<field name='profited' attrs="{'invisible':True}" />
+						<field name="transaction_ids">
+							<tree string="Transaction Tree" editable="bottom"
+								decoration-danger="type =='expense'"
+								decoration-info="type =='income'">
+								<field name="id" />
+								<field name="category_id" />
+								<field name="type" />
+								<field name="date" />
+								<field name="balance" />
+								<field name="note" />
+								<field name="currency_id" />
+								<field name="transaction_oneday_id" />
+								<field name="wallet_id"/>
+								<field name="write_date" />
+							</tree>
+						</field>
+						<group class="oe_subtotal_footer oe_inline" colspan="2"
+							name="total_balance">
+							<div class="oe_subtotal_footer_separator oe_inline">
+								<label for="total" />
+							</div>
+							<field name="total" nolabel="1"
+								decoration-danger="profited == False"
+								decoration-info="profited == True"
+								class="oe_subtotal_footer_separator" />
+						</group>
+					</page>
+				</notebook>
+			</xpath>
+			<!-- <xpath expr="//button[@name='action_open_transaction_view']" position="attributes"> 
+				<attribute name='icon'>...</attribute> </xpath> -->
+		</field>
+	</record>
+
+	<function model="wallet" name="_update_name_wallet" />
+
+	<record id="wallet_action" model="ir.actions.act_window">
+		<field name="name">Wallets</field>
+		<field name="res_model">wallet</field>
+		<field name="view_mode">tree,form,pivot</field>
+		<field name="context">{'search_default_name':''}</field>
+	</record>
+
+	<!-- <act_window id="wallet_action"
+		name="Wallets" res_model="wallet"
+		view_mode="tree,form,pivot" domain="[]"
+		context="{'active': 1}" limit="100" /> -->
+</odoo>

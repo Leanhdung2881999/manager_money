@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- <template id="manager_money_assets_frontend"
+		inherit_id="web.assets_frontend">
+		<link
+			href="/manager_money/static/src/scss/manager_money_style.scss"
+			rel="stylesheet" type="text/scss" />
+		<link
+			href="/manager_money/static/src/css/manager_money_style.css"
+			rel="stylesheet" type="text/css" />
+		<script src="/manager_money/static/seducation_money.js"
+			type="text/javascript" />
+		<xpath expr="." position="inside">
+			<h1>test</h1>
+		</xpath>
+	</template> -->
+</odoo>

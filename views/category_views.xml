@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="category_view_tree" model="ir.ui.view">
+		<field name="name">category.tree</field>
+		<field name="model">category</field>
+		<field name="arch" type="xml">
+			<tree string="Category Tree">
+				<field name="id" />
+				<field name="parent_category_id" />
+				<field name="name" />
+				<field name="icon" />
+				<field name="embed_code" />
+				<field name="test" widget='html'/>
+				<field name="test2" widget='html'/>
+				<field name="create_uid" />
+				<field name="write_date" />
+			</tree>
+		</field>
+	</record>
+	<record id="category_view_form" model="ir.ui.view">
+		<field name="name">category.form</field>
+		<field name="model">category</field>
+		<field name="arch" type="xml">
+			<form string="Category Form">
+				<group>
+					<group>
+						<field name="id" />
+						<field name="parent_category_id" />
+						<field name="name" />
+						<field name="icon" />
+						<field name="parent_path" force_save="1" />
+						<field name="embed_code" force_save="1" />
+						<field name="test" widget='html'/>
+						<field name="test2" widget='html' options="{'style-inline': true, 'codeview': true }"/>
+						<!-- <field name="create_uid" />
+						<field name="write_date" /> -->
+					</group>
+				</group>
+			</form>
+		</field>
+	</record>
+	<record id="category_view_kanban" model="ir.ui.view">
+		<field name="name">category.kanban</field>
+		<field name="model">category</field>
+		<field name="arch" type="xml">
+			<kanban default_group_by="parent_category_id"
+				group_create="true" group_edit="true" group_delete="true" quick_create="true" quick_create_view="category_view_form">
+				<field name="id" />
+				<field name="parent_category_id" />
+				<field name="name" />
+				<field name="icon" />
+				<field name="parent_path" force_save="1" />
+				<field name="embed_code" force_save="1" />
+				<field name="create_uid" />
+				<field name="write_date" />
+				<templates>
+					<t t-name="kanban-box">
+						<div class=" oe_kanban_global_click">
+							<div class="o_kanban_image">
+								<field name="embed_code" widget='html'/>
+							</div>
+							<div class="oe_kanban_details flex-column">
+								<ul>
+
+									<li>
+										<strong>
+											<field name="name" />
+										</strong>
+
+									</li>
+									<li>
+										<div class="row ml4">
+											<div>
+												<i class="fa fa-clock-o" aria-label="Date" role="img"
+													title="Date" />
+											</div>
+
+											<t t-esc="record.write_date.value" />
+										</div>
+									</li>
+									<li>
+										<div>
+											<field name="parent_path" />
+										</div>
+									</li>
+								</ul>
+							</div>
+
+						</div>
+					</t>
+				</templates>
+			</kanban>
+		</field>
+	</record>
+	<record id="category_action" model="ir.actions.act_window">
+		<field name="name">Categories</field>
+		<field name="res_model">category</field>
+		<field name="view_mode">tree,form,kanban</field>
+	</record>
+</odoo>

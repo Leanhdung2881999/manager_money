@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<menuitem id="manager_menu_root" name="Manager Money" />
+
+	<menuitem id="wallet_menu" name="Wallets"
+		action="wallet_action" parent="manager_menu_root" sequence="10" />
+
+	<menuitem id="transaction_oneday_menu"
+		name="Transaction One Day" action="transaction_oneday_action"
+		parent="manager_menu_root" sequence="15" />
+		
+	<!-- <menuitem id="wallet_menu" name="Wallets" action="wallet_action" parent="wallet_menu_parent" 
+		sequence="10" /> <menuitem id="wallet_menu_item" name="Wallets Item" action="wallet_action" 
+		parent="wallet_menu" sequence="10" /> -->
+
+	<menuitem id="transaction_menu" name="Transactions"
+		action="transaction_action" parent="manager_menu_root" sequence="20" />
+
+	<menuitem id="category_menu" name="Categories"
+		action="category_action" parent="manager_menu_root" sequence="30" />
+
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_cron_auto_check_transaction_time" model="ir.cron">
+        <field name="name">Transactions draft will check with today and set status for it</field>
+        <field name="interval_number">1</field>
+        <field name="active" eval="True" />
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(DateTime.now().replace(second=0) + timedelta(minutes=1)).strftime('%Y-%m-%d %H:%M:%S')" />
+        <field name="doall" eval="True"/>
+        <field name="model_id" ref="model_transaction"/>
+        <field name="code">model._autotransactions_draft_entries()</field>
+        <field name="state">code</field>
+    </record>
+</odoo>

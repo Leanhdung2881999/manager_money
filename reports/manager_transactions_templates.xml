@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="manager_transactions_template">
+        <t t-call="web.html_container">
+            <t t-foreach="wallets" t-as="wallet">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <h1>Wallet <t t-esc="wallet.name"/></h1>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Balance</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="wallet.transaction_ids" t-as="transaction">
+                                    <td><t t-esc="transaction.note"/></td>
+                                    <td><t t-esc="transaction.balance"/></td>
+                                    <td><t t-esc="transaction.date"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

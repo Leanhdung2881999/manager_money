@@ -1,0 +1,226 @@
+<?xml version ='1.0' encoding = 'utf-8'?>
+<odoo>
+	<record id="transaction_view_tree" model="ir.ui.view">
+		<field name="name">transaction.tree</field>
+		<field name="model">transaction</field>
+		<field name="arch" type="xml">
+			<tree string="Transaction Tree" create='false'
+				decoration-danger="type =='expense'"
+				decoration-info="type =='income'">
+				<header>
+					<button string="Confirm" name="test_validate_cache"
+						type="object" default_focus="1" class="btn-primary" />
+					<button string="Cancel" class="btn-default" special="cancel" />
+				</header>
+				<field name="id" />
+				<field name="icon_category" />
+				<field name="category_id" />
+				<field name="type" />
+				<field name="date" />
+				<field name="balance" />
+				<field name="note" />
+				<field name='status' widget="badge"
+					decoration-danger="status =='canceled'"
+					decoration-info="status =='draft'"
+					decoration-warning="status == 'waiting_confirm'"
+					decoration-success="status =='confirmed'" />
+				<field name="transaction_oneday_id" />
+				<field name="wallet_id" />
+				<field name="attachment_binary" />
+				<field name="attachment_image" 
+					options="{'preview_image':'image_64'}" />
+				<field name="currency_id" />
+
+			</tree>
+		</field>
+	</record>
+
+	<!-- <record id="transaction_view_graph" model="ir.ui.view"> <field name="name">transaction.graph</field> 
+		<field name="model">transaction</field> <field name="arch" type="xml"> <graph 
+		string="Transaction Graph"> <field name="date" /> <field name="category_id" 
+		/> </graph> </field> </record> -->
+
+	<record id="transaction_view_kanban" model="ir.ui.view">
+		<field name="name">transaction.kanban</field>
+		<field name="model">transaction</field>
+		<field name="arch" type="xml">
+			<kanban default_group_by="category_id" group_create="false"
+				group_edit="false" quick_create="false">
+				<field name="id" />
+				<field name="icon_category" />
+				<field name="category_id" />
+				<field name="type" />
+				<field name="date" />
+				<field name="balance" widget="image" />
+				<field name="note" />
+				<field name="status" />
+				<field name="currency_id" />
+				<field name="transaction_oneday_id" />
+				<!-- <field name="attachment_binary" widget="image"/> -->
+				<field name="attachment_image" />
+				<templates>
+					<progressbar field="status"
+						colors='{"draft":"info", "waiting_confirm": "warning", "canceled":"danger","confirmed": "success"}' />
+					<!-- <progressbar field="type" sum_field="balance"
+						colors='{"income":"info","expense":"danger"}' /> -->
+					<t t-name="kanban-box">
+						<div class=" oe_kanban_global_click">
+							<div class="o_kanban_image">
+								<!-- <field name="attachment_image" widget="image" options="{'preview_image':'image_64'}"/> -->
+								<t t-set="background_image"
+									t-value="kanban_image('transaction', 
+									'attachment_image', record.id.raw_value)" />
+								<div class="o_kanban_image_fill_left o_kanban_image_full"
+									t-attf-style="background-image:url('#{background_image}')">
+									<img class="o_kanban_image_inner_pic" alt="Avatar"
+										t-att-src="kanban_image('transaction', 
+									'attachment_image', record.id.raw_value)" />
+								</div>
+							</div>
+							<!-- <field name="attachment_binary" widget="image" /> -->
+							<div class="oe_kanban_details flex-column">
+								<ul>
+									<li>
+										<strong>
+											<field name="category_id" />
+										</strong>
+										<field name="type" widget="label_selection"
+											options="{'classes': {'expense': 'danger', 'income': 'info'}}" />
+									</li>
+									<li>
+										<!-- <t t-if="record.balance"> <t t-esc="record.balance.value" 
+											/> </t> -->
+										<field name="balance" widget="monetary"
+											decoration-danger="type =='expense'"
+											decoration-info="type =='income'" />
+									</li>
+									<li>
+										<div class="row ml4">
+											<div>
+												<i class="fa fa-clock-o" aria-label="Date" role="img"
+													title="Date" />
+											</div>
+
+											<t t-esc="record.date.value" />
+										</div>
+									</li>
+									<li>
+										<div>
+											<field name="status" widget="badge"
+												decoration-danger="status =='canceled'"
+												decoration-info="status =='draft'"
+												decoration-warning="status == 'waiting_confirm'"
+												decoration-success="status =='confirmed'" />
+										</div>
+									</li>
+								</ul>
+							</div>
+
+						</div>
+					</t>
+				</templates>
+			</kanban>
+		</field>
+	</record>
+
+	<record id="transaction_view_form" model="ir.ui.view">
+		<field name="name">transaction.form</field>
+		<field name="model">transaction</field>
+		<field name="arch" type="xml">
+			<form string="Transaction Form">
+				<header>
+					<button name='button_confirm' type='object'
+						class="oe_highlight"
+						attrs="{'invisible': ['|',('status','==','draft'),('status','==','confirmed')]}"
+						string='Confirm' />
+					<!-- <field name="status" widget="statusbar" /> -->
+				</header>
+				<sheet>
+					<group>
+						<group>
+							<field name="id" />
+							<field name="icon_category" />
+							<field name="category_id" />
+							<field name="type" />
+							<field name="date" />
+							<field name="balance" />
+							<field name="action" />
+						</group>
+						<group>
+							<field name="note" />
+							<field name='status' widget="badge"
+								decoration-danger="status =='canceled'"
+								decoration-info="status =='draft'"
+								decoration-warning="status == 'waiting_confirm'"
+								decoration-success="status =='confirmed'" />
+							<field name="currency_id" />
+							<field name="wallet_id" />
+							<field name="write_date" />
+							<field name="action_2" />
+						</group>
+					</group>
+					<notebook>
+						<page string="Attachment Transaction Image">
+							<field name="attachment_image"/>
+						</page>
+						<page string="Attachment Transaction Binary">
+							<field name="attachment_binary" widget='image'
+								options="{'preview_image': 'image_64'}" />
+						</page>
+
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="transaction_view_calendar" model="ir.ui.view">
+		<field name="name">transaction.calendar</field>
+		<field name="model">transaction</field>
+		<field name="arch" type="xml">
+			<calendar string="Transaction" color="category_id"
+				date_start="date" date_stop="date" mode="month">
+				<field name="id" />
+				<field name="icon_category" />
+				<field name="category_id" />
+				<field name="type" />
+				<field name="date" />
+				<field name="balance" />
+				<field name="note" />
+			</calendar>
+		</field>
+	</record>
+	<record id="transaction_view_search" model="ir.ui.view">
+		<field name="name">transaction.search</field>
+		<field name="model">transaction</field>
+		<field name="arch" type="xml">
+			<search string="Transaction Search">
+				<field name="note"
+					filter_domain="['|',('note', 'ilike', self),('type','ilike',self)]" />
+				<field name="balance" filter_domain="[('balance', '=', self)]" />
+				<!-- <field name="note"/> -->
+				<filter string="Type" name="type"
+					domain="[('type','ilike','expense')]" />
+				<!-- <filter string="Name Wallet" name="wallet_id" context="{'group_by':'wallet_id'}" 
+					/> -->
+				<filter string="Type" name="type"
+					context="{'group_by':'type'}" />
+				<filter string="Status" name="status"
+					context="{'group_by':'status:draft'}" />
+				<separator />
+				<filter string="Filter Date" context="{'group_by':'date'}"
+					name="date" />
+				<searchpanel>
+					<field name="wallet_id" icon="fa fa-list" />
+					<field name="transaction_oneday_id" icon="fa fa-list" />
+					<field name="category_id" icon="fa fa-list"
+						groupby="parent_category_id" />
+				</searchpanel>
+			</search>
+		</field>
+	</record>
+	<record id="transaction_action" model="ir.actions.act_window">
+		<field name="name">Transactions</field>
+		<field name="res_model">transaction</field>
+		<field name="view_mode">tree,form,kanban,calendar</field>
+	</record>
+</odoo>

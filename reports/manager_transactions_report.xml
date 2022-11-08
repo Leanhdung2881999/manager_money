@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="report_transactions" model="ir.actions.report">
+        <field name="name">List Transaction</field>
+        <field name="model">wallet</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">manager_money.manager_transactions_template</field>
+        <field name="report_file">manager_money.manager_transactions_template</field>
+        <field name="binding_model_id" ref="model_wallet"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding="utf-8"?>
+<odoo>
+	<record id="transaction_oneday_tree" model="ir.ui.view">
+		<field name="name">transaction.oneday.tree</field>
+		<field name="model">transaction.oneday</field>
+		<field name="arch" type="xml">
+			<tree string="Transaction One Day Tree">
+				<!-- <field name="id" /> -->
+				<field name="name" />
+				<field name="date_list_transaction" />
+				<field name="transaction_ids" widget="many2many_tags" />
+				<field name="write_date"/>
+				<!-- <field name="transaction_ids"> <tree string="Transaction Tree" editable="bottom" 
+					decoration-danger="type =='expense'" decoration-info="type =='income'"> <field 
+					name="id" /> <field name="category_id" /> <field name="type" /> <field name="date" 
+					/> <field name="balance" /> <field name="note" /> <field name="currency_id" 
+					/> <field name="write_date" /> </tree> </field> -->
+			</tree>
+		</field>
+	</record>
+	<record id="transaction_oneday_form" model="ir.ui.view">
+		<field name="name">transaction.oneday.form</field>
+		<field name="model">transaction.oneday</field>
+		<field name="arch" type="xml">
+			<form string="Transaction One Day Form">
+			<header>
+				<button name='button_confirm' type='object' class="oe_highlight" string='Object' />
+				<!-- <button name='button_confirm' type='workflow' class="oe_highlight" string='Workflow' /> -->
+			</header>
+				<sheet>
+					<group>
+						<field name="id" />
+						<field name="name" />
+						<field name="date_list_transaction" />
+					</group>
+					<field name="transaction_ids" context="{'default_date': date_list_transaction}">
+						<tree string="Transaction Tree" editable="bottom"
+							decoration-danger="type =='expense'"
+							decoration-info="type =='income'">
+							<field name="id" />
+							<field name="category_id"/>
+							<field name="type" />
+							<field name="date"/>
+							<field name="balance" />
+							<field name="note" force_save="1"/>
+							<field name='status' widget="badge"
+								decoration-danger="status =='canceled'"
+								decoration-info="status =='draft'"
+								decoration-warning="status == 'waiting_confirm'"
+								decoration-success="status =='confirmed'"
+								attrs="{'readonly':True}" />
+							<field name="wallet_id" />
+							<field name="currency_id" />
+							<field name="write_date" />
+						</tree>
+					</field>
+					<!-- <field name="transaction_ids" widget="many2many_tags" /> -->
+				</sheet>
+
+
+				<!-- <field name="transaction_ids"> <tree string="List Transaction" editable="bottom"> 
+					<field name="id" /> <field name="icon_category" /> <field name="category_id" 
+					/> <field name="type" /> <field name="date" /> <field name="balance" /> <field 
+					name="note" /> <field name="attachment_binary" /> <field name="currency_id" 
+					/> <field name="write_date" /> </tree> </field> -->
+			</form>
+		</field>
+	</record>
+	<record id="transaction_oneday_action"
+		model="ir.actions.act_window">
+		<field name="name">Transaction One Day</field>
+		<field name="res_model">transaction.oneday</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+</odoo>
